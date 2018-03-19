@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="save" content="history" />
+	<title>Support Kit Usage Statistics</title>
+    <link rel="stylesheet" type="text/css" href="./css/semantic.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/calendar.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+    <script src="./js/semantic.min.js"></script>
+    <script src="./js/echarts.min.js"></script>
+    <script src="./js/calendar.js"></script>
+    <script src="./js/reload.js"></script>
+</head> 
+<body> 
+	<div class="ui segment" style="background:url(images/01.jpg);background-size:cover;">
+		<h1 class="ui header">Support Kit Usage Statistics</h1>
+		<div class="ui form">
+			<div class="three fields" style="width:50%;height:30px;">
+			  <div class="field">
+			    <div class="ui calendar" id="rangestart">
+			      <div class="ui input left icon">
+			        <i class="calendar icon"></i>
+			        <input id="StartDate" type="text" th:value="${StartDate}"/>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="field">
+			    <div class="ui calendar" id="rangeend">
+			      <div class="ui input left icon">
+			        <i class="calendar icon"></i>
+			        <input id="EndDate" type="text" th:value="${EndDate}"/> 
+			      </div>
+			    </div>
+			  </div>
+			  <div class="field">
+			    <button class="ui primary button" onclick="javascrtpt:jump()">Search</button> 
+			  </div>
+			</div>
+		</div>	
+        <div class="ui vertical segment">
+            <div class="ui three column grid">
+                <div class="column">
+                    <div class="ui horizontal segment">
+                        <div id="clgl-2_1"></div>  
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui horizontal segment">
+                        <div id="clgl-2_2"></div> 
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui horizontal segment">
+                        <div id="clgl-4">
+                        <h2>User search count statistics</h2>
+			            <table class="ui striped table">
+							<thead>
+						    	<tr>
+						      		<th>Name</th>
+						      		<th>Counts</th>
+						    	</tr>
+						  	</thead>
+						  	<tbody>
+						      	<tr th:each="user : ${userList}">
+			                        <td th:text="${user.name}"></td>
+			                        <td th:text="${user.count}"></td>
+			                   </tr>
+					        </tbody>
+						</table>
+						</div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui vertical segment">
+            <div class="ui three column grid">
+                <div class="column">
+                    <div class="ui horizontal segment">
+                        <div id="clgl-3_1"></div> 
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui horizontal segment">
+                        <div id="clgl-3_2"></div> 
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui horizontal segment">
+                        <div id="clgl-3_3"></div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+    	$('#rangestart').calendar({
+    	  type: 'date',
+    	  endCalendar: $('#rangeend')
+    	});
+    	$('#rangeend').calendar({
+    	  type: 'date',
+    	  startCalendar: $('#rangestart')
+    	});
+    	ReLoad(StartDate, EndDate);
+    </script>
+</body>
+
+
+</html>
